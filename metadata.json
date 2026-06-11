@@ -1,0 +1,6 @@
+{
+  "name": "Needly",
+  "description": "An exquisite recreation of the Needly e-commerce landing page. Features a clean orange visual identity, interactive product grid, flash sale timer, top brands slider, cart integrations, and custom illustrations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
