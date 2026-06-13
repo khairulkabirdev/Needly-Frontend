@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from "react";
-import { 
-  Star, 
-  Heart, 
-  ShoppingCart, 
-  SlidersHorizontal, 
-  Grid2X2, 
-  List, 
-  ChevronDown, 
-  ChevronUp, 
+import {
+  Star,
+  Heart,
+  ShoppingCart,
+  SlidersHorizontal,
+  Grid2X2,
+  List,
+  ChevronDown,
+  ChevronUp,
   RotateCcw,
   ChevronLeft,
   ChevronRight,
@@ -61,16 +61,16 @@ export default function SmartphonesPage({
   const [isBrandExpanded, setIsBrandExpanded] = useState(true);
 
   const toggleBrandFilter = (brandName: string) => {
-    setSelectedBrands(prev => 
-      prev.includes(brandName) 
-        ? prev.filter(b => b !== brandName) 
+    setSelectedBrands(prev =>
+      prev.includes(brandName)
+        ? prev.filter(b => b !== brandName)
         : [...prev, brandName]
     );
     setCurrentPage(1);
   };
 
   const toggleStarFilter = (starsNumber: number) => {
-    setSelectedStars(prev => 
+    setSelectedStars(prev =>
       prev.includes(starsNumber)
         ? prev.filter(s => s !== starsNumber)
         : [...prev, starsNumber]
@@ -79,7 +79,7 @@ export default function SmartphonesPage({
   };
 
   const toggleStorageFilter = (size: string) => {
-    setSelectedStorage(prev => 
+    setSelectedStorage(prev =>
       prev.includes(size)
         ? prev.filter(s => s !== size)
         : [...prev, size]
@@ -88,7 +88,7 @@ export default function SmartphonesPage({
   };
 
   const toggleScreenFilter = (sizeCode: string) => {
-    setSelectedScreenSizes(prev => 
+    setSelectedScreenSizes(prev =>
       prev.includes(sizeCode)
         ? prev.filter(s => s !== sizeCode)
         : [...prev, sizeCode]
@@ -110,7 +110,6 @@ export default function SmartphonesPage({
   // Filter logic
   const filteredAndSortedProducts = useMemo(() => {
     let result = [...SMARTPHONES_DATA];
-
     // Brand filter
     if (selectedBrands.length > 0) {
       result = result.filter(prod => selectedBrands.includes(prod.brand));
@@ -182,10 +181,10 @@ export default function SmartphonesPage({
 
   return (
     <div className="w-full font-sans pb-16" id="smartphones-category-layout">
-      
+
       {/* 1. Main Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        
+
         {/* 2. Path Breadcrumbs matching screenshot exactly */}
         <nav className="flex items-center space-x-1.5 text-[11px] text-zinc-400 font-medium py-3" id="smartphones-breadcrumbs">
           <button onClick={onNavigateHome} className="hover:text-zinc-900 transition-colors cursor-pointer">Home</button>
@@ -214,18 +213,18 @@ export default function SmartphonesPage({
               <p className="text-[13px] font-extrabold text-zinc-800">Latest Smartphones</p>
               <p className="text-xs font-medium text-[#FF5000] mt-1">Up to <span className="font-extrabold text-base">30% OFF</span></p>
             </div>
-            
+
             {/* Visual Phone Collage placement */}
             <div className="w-28 h-20 relative flex items-center justify-center shrink-0">
-              <img 
+              <img
                 src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=300&auto=format&fit=crop&q=80"
-                alt="Promo Smartphones" 
+                alt="Promo Smartphones"
                 className="w-16 h-16 object-contain absolute z-10 rotate-12 translate-x-3 pointer-events-none select-none drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
-              <img 
+              <img
                 src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300&auto=format&fit=crop&q=80"
-                alt="Promo Smartphones 2" 
+                alt="Promo Smartphones 2"
                 className="w-14 h-14 object-contain absolute -rotate-12 -translate-x-3 pointer-events-none select-none drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
@@ -235,10 +234,10 @@ export default function SmartphonesPage({
 
         {/* 4. Secondary Row: Sidebar (Filter block) + Right Product Area */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start" id="smartphones-grid-split">
-          
+
           {/* ================== LEFT FILTER SIDEBAR BACKPLANE ================== */}
           <aside className={`${isFiltersMobileOpen ? "block" : "hidden lg:block"} lg:col-span-3 bg-white border border-zinc-200/60 rounded-[28px] p-5 shadow-3xs text-left select-none space-y-6 animate-fade-in`} id="smartphones-filter-sidebar">
-            
+
             {/* Category Listing Module */}
             <div className="space-y-3" id="categories-filter-widget">
               <h3 className="text-xs font-black text-zinc-900 uppercase tracking-wider mb-2">
@@ -295,7 +294,7 @@ export default function SmartphonesPage({
 
             {/* Brand Filter Element */}
             <div className="space-y-3" id="brand-filters-list">
-              <button 
+              <button
                 onClick={() => setIsBrandExpanded(!isBrandExpanded)}
                 className="flex items-center justify-between w-full text-[11px] font-black text-zinc-900 uppercase tracking-wider text-left"
               >
@@ -313,12 +312,12 @@ export default function SmartphonesPage({
                     { name: "OnePlus", count: 15 },
                     { name: "Oppo", count: 20 }
                   ].map((brand) => (
-                    <label 
-                      key={brand.name} 
+                    <label
+                      key={brand.name}
                       className="flex items-center justify-between text-xs font-medium text-zinc-650 cursor-pointer hover:text-zinc-900 transition-colors"
                     >
                       <div className="flex items-center space-x-2.5">
-                        <input 
+                        <input
                           type="checkbox"
                           className="rounded border-zinc-300 text-[#FF5000] focus:ring-[#FF5000] cursor-pointer"
                           checked={selectedBrands.includes(brand.name)}
@@ -345,10 +344,10 @@ export default function SmartphonesPage({
               <h4 className="text-[11px] font-black text-zinc-900 uppercase tracking-wider">
                 Price Range
               </h4>
-              
+
               <div className="space-y-2 pt-1 px-1">
                 {/* HTML range input (simple dual mockup) */}
-                <input 
+                <input
                   type="range"
                   min={50}
                   max={1500}
@@ -361,7 +360,7 @@ export default function SmartphonesPage({
                   className="w-full h-1 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#FF5000]"
                   id="price-range-slider-bar"
                 />
-                
+
                 {/* Visual Boxes layout matching screenshot */}
                 <div className="flex items-center justify-between gap-2.5 pt-2">
                   <div className="flex-1 bg-[#FBFBFA] border border-zinc-250/80 rounded-xl py-2 px-3 text-center">
@@ -393,12 +392,12 @@ export default function SmartphonesPage({
                   { stars: 2, label: "Up", count: 98 },
                   { stars: 1, label: "Up", count: 45 }
                 ].map((row) => (
-                  <label 
+                  <label
                     key={row.stars}
                     className="flex items-center justify-between text-xs font-medium text-zinc-650 hover:text-zinc-900 cursor-pointer transition-colors"
                   >
                     <div className="flex items-center space-x-2.5">
-                      <input 
+                      <input
                         type="checkbox"
                         checked={selectedStars.includes(row.stars)}
                         onChange={() => toggleStarFilter(row.stars)}
@@ -407,9 +406,9 @@ export default function SmartphonesPage({
                       />
                       <div className="flex items-center text-amber-500 space-x-0.5">
                         {Array.from({ length: 5 }).map((_, idx) => (
-                          <Star 
-                            key={idx} 
-                            className={`w-3 h-3 ${idx < row.stars ? "fill-amber-400 stroke-amber-400" : "text-zinc-200"}`} 
+                          <Star
+                            key={idx}
+                            className={`w-3 h-3 ${idx < row.stars ? "fill-amber-400 stroke-amber-400" : "text-zinc-200"}`}
                           />
                         ))}
                         <span className="text-zinc-500 font-medium text-[11px] ml-1.5">{row.label}</span>
@@ -436,12 +435,12 @@ export default function SmartphonesPage({
                   { code: "256GB", count: 96 },
                   { code: "512GB", count: 32 }
                 ].map((obj) => (
-                  <label 
+                  <label
                     key={obj.code}
                     className="flex items-center justify-between text-xs font-medium text-zinc-650 hover:text-zinc-900 cursor-pointer transition-colors"
                   >
                     <div className="flex items-center space-x-2.5">
-                      <input 
+                      <input
                         type="checkbox"
                         checked={selectedStorage.includes(obj.code)}
                         onChange={() => toggleStorageFilter(obj.code)}
@@ -471,12 +470,12 @@ export default function SmartphonesPage({
                   { label: "6.1\" - 6.7\"", code: "6.1-6.7", count: 112 },
                   { label: "Above 6.7\"", code: "above-6.7", count: 54 }
                 ].map((sz) => (
-                  <label 
+                  <label
                     key={sz.code}
                     className="flex items-center justify-between text-xs font-medium text-zinc-650 hover:text-zinc-900 cursor-pointer transition-colors"
                   >
                     <div className="flex items-center space-x-2.5">
-                      <input 
+                      <input
                         type="checkbox"
                         checked={selectedScreenSizes.includes(sz.code)}
                         onChange={() => toggleScreenFilter(sz.code)}
@@ -507,14 +506,14 @@ export default function SmartphonesPage({
 
           {/* ================== RIGHT PRODUCT BACKPLANE VIEWPORT ================== */}
           <main className="lg:col-span-9" id="smartphones-product-area">
-            
+
             {/* Top Area Toolbar */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 mb-6 gap-3 bg-gray-50 border border-zinc-100 rounded-2xl" id="smartphones-results-top-toolbar">
-              
+
               {/* Layout triggers (Grid / List switcher + Mobile Filter Button) */}
               <div className="flex items-center justify-between sm:justify-start gap-4 text-left w-full sm:w-auto">
                 <div className="flex items-center gap-2">
-                  <button 
+                  <button
                     onClick={() => setIsGridView(true)}
                     className={`p-2 rounded-lg cursor-pointer transition-all ${isGridView ? "bg-[#FFF5F0] text-[#FF5000] border border-[#FF5000]/10" : "text-zinc-400 hover:bg-zinc-100"}`}
                     aria-label="Grid View"
@@ -522,7 +521,7 @@ export default function SmartphonesPage({
                   >
                     <Grid2X2 className="w-4 h-4" />
                   </button>
-                  <button 
+                  <button
                     onClick={() => setIsGridView(false)}
                     className={`p-2 rounded-lg cursor-pointer transition-all ${!isGridView ? "bg-[#FFF5F0] text-[#FF5000] border border-[#FF5000]/10" : "text-zinc-400 hover:bg-zinc-100"}`}
                     aria-label="List View"
@@ -542,7 +541,7 @@ export default function SmartphonesPage({
                     <span>Filters {selectedBrands.length + selectedStars.length + selectedStorage.length + selectedScreenSizes.length > 0 ? `(${selectedBrands.length + selectedStars.length + selectedStorage.length + selectedScreenSizes.length})` : ""}</span>
                   </button>
                 </div>
-                
+
                 <span className="text-xs text-zinc-500 font-semibold font-mono shrink-0">
                   Showing 1-{filteredAndSortedProducts.length} results
                 </span>
@@ -575,7 +574,7 @@ export default function SmartphonesPage({
             {filteredAndSortedProducts.length === 0 ? (
               <div className="bg-white border border-dashed border-zinc-200 rounded-[28px] py-20 px-8 text-center space-y-4" id="empty-filters-box">
                 <p className="text-zinc-400 text-sm font-medium">No smartphones found matching the current filters.</p>
-                <button 
+                <button
                   onClick={clearAllFilters}
                   className="px-5 py-2.5 bg-[#FF5000] hover:bg-[#E04600] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-3xs"
                 >
@@ -583,12 +582,12 @@ export default function SmartphonesPage({
                 </button>
               </div>
             ) : (
-              <div 
+              <div
                 className={
-                  isGridView 
-                    ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5" 
+                  isGridView
+                    ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"
                     : "flex flex-col gap-4"
-                } 
+                }
                 id="smartphones-listed-grid"
               >
                 {filteredAndSortedProducts.map((phone) => {
@@ -608,9 +607,8 @@ export default function SmartphonesPage({
                         <div className="flex items-center justify-between w-full absolute top-4 left-0 px-4 z-10">
                           {/* Discount Badge */}
                           {phone.badgeType !== "none" ? (
-                            <span className={`text-[10px] font-black uppercase text-white px-2.5 py-1 rounded-[8px] tracking-wide shadow-3xs ${
-                              phone.badgeType === "new" ? "bg-emerald-500" : "bg-red-500"
-                            }`}>
+                            <span className={`text-[10px] font-black uppercase text-white px-2.5 py-1 rounded-[8px] tracking-wide shadow-3xs ${phone.badgeType === "new" ? "bg-emerald-500" : "bg-red-500"
+                              }`}>
                               {phone.discountBadge}
                             </span>
                           ) : (
@@ -621,11 +619,10 @@ export default function SmartphonesPage({
                           <button
                             type="button"
                             onClick={(e) => handleAddToWishlistClick(e, phone)}
-                            className={`w-8 h-8 rounded-full border bg-white flex items-center justify-center transition-all shadow-3xs hover:scale-105 active:scale-95 ${
-                              isWishlisted 
-                                ? "border-[#FF5000]/10 text-red-500" 
+                            className={`w-8 h-8 rounded-full border bg-white flex items-center justify-center transition-all shadow-3xs hover:scale-105 active:scale-95 ${isWishlisted
+                                ? "border-[#FF5000]/10 text-red-500"
                                 : "border-zinc-200 text-zinc-400 hover:text-zinc-900"
-                          }`}
+                              }`}
                             aria-label={`Favorite ${phone.name}`}
                             id={`wishicon-grid-${phone.id}`}
                           >
@@ -659,9 +656,9 @@ export default function SmartphonesPage({
                           <div className="flex items-center text-amber-500 text-[10px] space-x-0.5 pt-0.5">
                             <div className="flex items-center">
                               {Array.from({ length: 5 }).map((_, idx) => (
-                                <Star 
-                                  key={idx} 
-                                  className={`w-3 h-3 ${idx < phone.rating ? "fill-amber-400 stroke-amber-400" : "text-zinc-200"}`} 
+                                <Star
+                                  key={idx}
+                                  className={`w-3 h-3 ${idx < phone.rating ? "fill-amber-400 stroke-amber-400" : "text-zinc-200"}`}
                                 />
                               ))}
                             </div>
@@ -675,7 +672,7 @@ export default function SmartphonesPage({
                             </span>
                             {phone.originalPrice && (
                               <span className="text-[11px] text-zinc-400 line-through font-sans">
-                                 ${phone.originalPrice.toFixed(2)}
+                                ${phone.originalPrice.toFixed(2)}
                               </span>
                             )}
                             {saving > 0 && (
@@ -724,9 +721,8 @@ export default function SmartphonesPage({
                         <div className="w-full h-48 sm:w-44 sm:h-44 bg-zinc-50/50 rounded-2xl flex items-center justify-center p-4 shrink-0 relative overflow-hidden group-hover:bg-zinc-50 transition-colors">
                           {/* Discount Badge directly inside the image container for cleaner local context */}
                           {phone.badgeType !== "none" && (
-                            <span className={`absolute top-3 left-3 z-10 text-[9px] font-black uppercase text-white px-2 py-0.5 rounded-[6px] tracking-wider shadow-3xs ${
-                              phone.badgeType === "new" ? "bg-emerald-500" : "bg-red-500"
-                            }`}>
+                            <span className={`absolute top-3 left-3 z-10 text-[9px] font-black uppercase text-white px-2 py-0.5 rounded-[6px] tracking-wider shadow-3xs ${phone.badgeType === "new" ? "bg-emerald-500" : "bg-red-500"
+                              }`}>
                               {phone.discountBadge}
                             </span>
                           )}
@@ -756,9 +752,9 @@ export default function SmartphonesPage({
                             <div className="flex items-center text-amber-500 text-xs space-x-1">
                               <div className="flex items-center">
                                 {Array.from({ length: 5 }).map((_, idx) => (
-                                  <Star 
-                                    key={idx} 
-                                    className={`w-3.5 h-3.5 ${idx < phone.rating ? "fill-amber-400 stroke-amber-400" : "text-zinc-200"}`} 
+                                  <Star
+                                    key={idx}
+                                    className={`w-3.5 h-3.5 ${idx < phone.rating ? "fill-amber-400 stroke-amber-400" : "text-zinc-200"}`}
                                   />
                                 ))}
                               </div>
@@ -787,7 +783,7 @@ export default function SmartphonesPage({
 
                         {/* Right Section: Separate block for Pricing & Action Buttons */}
                         <div className="w-full sm:w-48 shrink-0 flex flex-col justify-between items-start sm:items-end sm:text-right border-t sm:border-t-0 sm:border-l border-zinc-100 pt-4 sm:pt-0 sm:pl-6 space-y-4 sm:space-y-0 text-left">
-                          
+
                           {/* Pricing structure */}
                           <div className="space-y-1 w-full text-left sm:text-right">
                             <span className="text-zinc-400 text-[10px] font-bold uppercase tracking-wider block font-sans">Retail Price</span>
@@ -797,7 +793,7 @@ export default function SmartphonesPage({
                               </span>
                               {phone.originalPrice && (
                                 <span className="text-xs text-zinc-400 line-through font-sans">
-                                   ${phone.originalPrice.toFixed(2)}
+                                  ${phone.originalPrice.toFixed(2)}
                                 </span>
                               )}
                             </div>
@@ -814,11 +810,10 @@ export default function SmartphonesPage({
                             <button
                               type="button"
                               onClick={(e) => handleAddToWishlistClick(e, phone)}
-                              className={`w-11 h-11 rounded-xl border bg-white flex items-center justify-center transition-all shadow-3xs hover:scale-105 active:scale-95 hover:bg-zinc-50 shrink-0 ${
-                                isWishlisted 
-                                  ? "border-red-100 text-red-500 bg-red-50/20" 
+                              className={`w-11 h-11 rounded-xl border bg-white flex items-center justify-center transition-all shadow-3xs hover:scale-105 active:scale-95 hover:bg-zinc-50 shrink-0 ${isWishlisted
+                                  ? "border-red-100 text-red-500 bg-red-50/20"
                                   : "border-zinc-250 text-zinc-400 hover:text-zinc-800"
-                              }`}
+                                }`}
                               aria-label={`Favorite ${phone.name}`}
                               id={`wishicon-list-${phone.id}`}
                             >
@@ -847,7 +842,7 @@ export default function SmartphonesPage({
 
             {/* Pagination Segment exactly styled like mockup code */}
             <div className="flex items-center justify-center space-x-1.5 pt-12 pb-4" id="smartphones-pagination-widget">
-              
+
               {/* Back btn */}
               <button
                 type="button"
@@ -865,11 +860,10 @@ export default function SmartphonesPage({
                   key={pageNum}
                   type="button"
                   onClick={() => setCurrentPage(pageNum)}
-                  className={`w-8 h-8 rounded-xl text-xs font-black transition-all flex items-center justify-center shrink-0 cursor-pointer ${
-                    currentPage === pageNum
+                  className={`w-8 h-8 rounded-xl text-xs font-black transition-all flex items-center justify-center shrink-0 cursor-pointer ${currentPage === pageNum
                       ? "bg-[#FF5000] text-white shadow-3xs scale-105"
                       : "bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-50"
-                  }`}
+                    }`}
                   id={`page-btn-${pageNum}`}
                 >
                   {pageNum}
@@ -881,11 +875,10 @@ export default function SmartphonesPage({
               <button
                 type="button"
                 onClick={() => setCurrentPage(27)}
-                className={`w-8 h-8 rounded-xl text-xs font-black transition-all flex items-center justify-center shrink-0 cursor-pointer ${
-                  currentPage === 27
+                className={`w-8 h-8 rounded-xl text-xs font-black transition-all flex items-center justify-center shrink-0 cursor-pointer ${currentPage === 27
                     ? "bg-[#FF5000] text-white shadow-3xs"
                     : "bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-50"
-                }`}
+                  }`}
                 id="page-btn-27"
               >
                 27
@@ -912,7 +905,7 @@ export default function SmartphonesPage({
       {/* 5. Trust Badges strip (matching layout at the bottom of category page) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-8 border-t border-zinc-200" id="smartphones-trust-badges">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white border border-zinc-150/80 rounded-3xl p-6 shadow-3xs">
-          
+
           <div className="flex items-center space-x-3.5 text-left" id="badge-shipping">
             <div className="w-10 h-10 rounded-xl bg-orange-100/50 text-[#FF5000] flex items-center justify-center shrink-0 font-bold text-xl">
               🚚
