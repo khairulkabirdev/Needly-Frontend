@@ -95,7 +95,7 @@ export default function Header({
   return (
     <header className="w-full bg-white border-b border-[#FF5000]/10 font-sans shadow-xs" id="needly-main-header">
       {/* 1. Top Ribbon Bar */}
-      <div className="w-full bg-transparent text-[11px] font-semibold text-gray-500 py-2.5 border-b border-[#FF5000]/5" id="top-ribbon">
+      <div className="hidden lg:block w-full bg-transparent text-[11px] font-semibold text-gray-500 py-2.5 border-b border-[#FF5000]/5" id="top-ribbon">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center space-x-6">
             <a href="#sell" className="flex items-center hover:text-[#FF5000] transition-colors">
@@ -130,42 +130,80 @@ export default function Header({
 
       {/* 2. Main Large Header Bar */}
       <div className="w-full py-4 bg-transparent" id="main-nav-bar">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
           
-          {/* Logo */}
-          <button 
-            type="button"
-            onClick={() => onNavigateHome?.()} 
-            className="flex items-center space-x-2.5 shrink-0 select-none group text-left cursor-pointer focus:outline-hidden" 
-            id="needly-logo-link"
-          >
-            {/* Custom crafted N icon matching Needly style */}
-            <div className="w-10 h-10 rounded-2xl bg-[#FF5000] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
-              <span className="text-white font-black text-2xl tracking-tight">N</span>
+          {/* Top row on mobile: contains logo and user controls */}
+          <div className="flex items-center justify-between w-full md:w-auto shrink-0 animate-fade-in">
+            {/* Logo */}
+            <button 
+              type="button"
+              onClick={() => onNavigateHome?.()} 
+              className="flex items-center space-x-2.5 shrink-0 select-none group text-left cursor-pointer focus:outline-hidden" 
+              id="needly-logo-link"
+            >
+              {/* Custom crafted N icon matching Needly style */}
+              <div className="w-10 h-10 rounded-2xl bg-[#FF5000] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-200">
+                <span className="text-white font-black text-2xl tracking-tight">N</span>
+              </div>
+              <span className="text-3xl font-black text-[#FF5000] tracking-tight">
+                Needly
+              </span>
+            </button>
+
+            {/* Mobile / tablet user controls (Only visible on mobile/tablet header top row) */}
+            <div className="flex md:hidden items-center space-x-5" id="mobile-user-controls">
+              <button 
+                onClick={onOpenAuth}
+                className="text-gray-850 hover:text-[#FF5000] transition-colors relative"
+                type="button"
+              >
+                <User className="w-6 h-6 text-gray-800 stroke-[1.5]" />
+              </button>
+              <button 
+                onClick={onOpenWishlist}
+                className="relative text-gray-850 hover:text-[#FF5000] transition-colors"
+                type="button"
+              >
+                <Heart className="w-6 h-6 text-gray-800 stroke-[1.5]" />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 flex min-w-[16px] h-4 px-1 items-center justify-center rounded-full bg-[#FF5000] text-[9px] font-black text-white ring-2 ring-white leading-none text-center select-none z-10">
+                    {wishlistCount}
+                  </span>
+                )}
+              </button>
+              <button 
+                onClick={onOpenCart}
+                className="relative text-gray-850 hover:text-[#FF5000] transition-colors"
+                type="button"
+              >
+                <ShoppingCart className="w-6 h-6 text-gray-800 stroke-[1.5]" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 flex min-w-[16px] h-4 px-1 items-center justify-center rounded-full bg-[#FF5000] text-[9px] font-black text-white ring-2 ring-white leading-none text-center select-none z-10">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
             </div>
-            <span className="text-3xl font-black text-[#FF5000] tracking-tight">
-              Needly
-            </span>
-          </button>
+          </div>
 
           {/* Search form bar matching screenshot layout exactly */}
-          <form onSubmit={handleSubmit} className="flex-1 max-w-2xl flex items-center" id="search-form">
+          <form onSubmit={handleSubmit} className="w-full md:flex-1 md:max-w-2xl flex items-center" id="search-form">
             {/* All Categories Button with absolute list placement */}
-            <div className="relative mr-3 shrink-0">
+            <div className="relative mr-2 md:mr-3 shrink-0">
               <button 
                 type="button"
                 onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                 className={
                   isHomepage
-                    ? "flex items-center space-x-3 px-4 py-3 border border-gray-200 rounded-2xl bg-white text-gray-800 text-xs font-bold hover:bg-gray-50 transition-all text-left cursor-pointer shrink-0"
-                    : "flex items-center space-x-3 px-4 py-3 border border-transparent rounded-2xl bg-[#FF5000] hover:bg-[#E04600] text-white text-xs font-bold transition-all text-left cursor-pointer shrink-0 shadow-sm"
+                    ? "flex items-center space-x-1.5 md:space-x-3 px-3 md:px-4 py-3 border border-gray-200 rounded-2xl bg-white text-gray-800 text-xs font-bold hover:bg-gray-50 transition-all text-left cursor-pointer shrink-0"
+                    : "flex items-center space-x-1.5 md:space-x-3 px-3 md:px-4 py-3 border border-transparent rounded-2xl bg-[#FF5000] hover:bg-[#E04600] text-white text-xs font-bold transition-all text-left cursor-pointer shrink-0 shadow-sm"
                 }
               >
                 <Menu className={isHomepage ? "w-4 h-4 text-gray-800" : "w-4 h-4 text-white"} />
-                <span>All Categories</span>
+                <span className="hidden sm:inline">All Categories</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-150 ${isHomepage ? "text-gray-500" : "text-white"} ${isCategoryOpen ? 'rotate-180' : ''}`} />
               </button>
-
+ 
               {isCategoryOpen && (
                 <div className="absolute top-full left-0 mt-2 bg-white border border-orange-100 rounded-2xl shadow-xl py-2 w-64 max-h-[420px] overflow-y-auto z-50 animate-fade-in divide-y divide-gray-50">
                   <button
@@ -219,7 +257,7 @@ export default function Header({
           </form>
 
           {/* User controls / Icons matching screenshot style */}
-          <div className="flex items-center space-x-7 shrink-0" id="header-user-controls">
+          <div className="hidden md:flex items-center space-x-7 shrink-0 animate-fade-in" id="header-user-controls">
             
             {/* Account Info */}
             <button 

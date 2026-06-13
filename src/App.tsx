@@ -5,6 +5,7 @@ import ProductDetailPage from "./app/product/product-detail/page";
 import CheckoutPage from "./app/checkout/page";
 import WishlistPage from "./app/wishlist/page";
 import SmartphonesPage from "./app/product/page";
+import AuthPage from "./app/auth/page";
 
 import { Product, CartItem } from "./types";
 import { FLASH_DEALS, CHOICE_DEALS, SMARTPHONES_DATA } from "./data";
@@ -52,6 +53,8 @@ export default function App() {
         setCurrentPath("/checkout");
       } else if (path === "/smartphones") {
         setCurrentPath("/smartphones");
+      } else if (path === "/auth") {
+        setCurrentPath("/auth");
       } else {
         setCurrentPath("/");
       }
@@ -81,10 +84,55 @@ export default function App() {
     window.history.pushState({ type: "checkout" }, "", "/checkout");
   };
 
+  const handleNavigateToAuth = () => {
+    setCurrentPath("/auth");
+    window.history.pushState({ type: "auth" }, "", "/auth");
+  };
+
   // Core database state
   const [cart, setCart] = useState<CartItem[]>([
-    { product: FLASH_DEALS[0], quantity: 10, selectedColor: "Original Slate" },
-    { product: CHOICE_DEALS[5], quantity: 10, selectedColor: "Original Slate" }
+    {
+      product: {
+        id: "curren-watch",
+        name: "Curren Men's Watch",
+        price: 29.99,
+        originalPrice: 45.00,
+        rating: 4.8,
+        reviewsCount: "120",
+        imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&auto=format&fit=crop&q=80",
+        category: "watches"
+      },
+      quantity: 1,
+      selectedColor: "Black"
+    },
+    {
+      product: {
+        id: "women-handbag",
+        name: "Women Handbag",
+        price: 34.99,
+        originalPrice: 55.00,
+        rating: 4.9,
+        reviewsCount: "95",
+        imageUrl: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300&auto=format&fit=crop&q=80",
+        category: "fashion"
+      },
+      quantity: 1,
+      selectedColor: "Beige"
+    },
+    {
+      product: {
+        id: "white-sneakers",
+        name: "White Sneakers",
+        price: 49.99,
+        originalPrice: 75.00,
+        rating: 4.7,
+        reviewsCount: "340",
+        imageUrl: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=300&auto=format&fit=crop&q=80",
+        category: "fashion"
+      },
+      quantity: 1,
+      selectedColor: "Size: 42"
+    }
   ]);
   const [wishlist, setWishlist] = useState<Product[]>([
     ...FLASH_DEALS,
@@ -319,6 +367,17 @@ export default function App() {
           />
         );
 
+      case "/auth":
+        return (
+          <AuthPage
+            onAuthSuccess={(email) => {
+              triggerToast(`Successfully connected as ${email}!`);
+              handleNavigateHome();
+            }}
+            onNavigateHome={handleNavigateHome}
+          />
+        );
+
       case "/":
       default:
         return (
@@ -331,7 +390,7 @@ export default function App() {
             onAddToCart={(p) => handleAddToCart(p, 1)}
             onAddToWishlist={handleAddToWishlist}
             onSelectProduct={handleSelectProduct}
-            onOpenAuth={() => setIsAuthOpen(true)}
+            onOpenAuth={handleNavigateToAuth}
             isCouponApplied={isCouponApplied}
             onApplyCoupon={handleApplyCoupon}
             onSearchSubmit={handleSearchSubmit}
@@ -352,6 +411,7 @@ export default function App() {
       onNavigateHome={handleNavigateHome}
       onNavigateToWishlist={handleNavigateToWishlist}
       onNavigateToCheckout={handleNavigateToCheckout}
+      onNavigateToAuth={handleNavigateToAuth}
       isCartOpen={isCartOpen}
       setIsCartOpen={setIsCartOpen}
       isAuthOpen={isAuthOpen}

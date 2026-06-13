@@ -17,8 +17,10 @@ interface MockRelatedProduct {
 }
 
 export default function RelatedProductsGrid({ onSelectProduct }: RelatedProductsGridProps) {
+  const [startIndex, setStartIndex] = useState(0);
+
   // exact database replica from mockup image:
-  const recommendations: MockRelatedProduct[] = [
+  const ALL_RECS: MockRelatedProduct[] = [
     {
       id: "rec1",
       name: "Bose QuietComfort 45 Headphones",
@@ -45,8 +47,45 @@ export default function RelatedProductsGrid({ onSelectProduct }: RelatedProducts
       reviewsCount: "752",
       imageUrl: "https://images.unsplash.com/photo-1608156639585-b3a032ef9689?w=300&auto=format&fit=crop&q=80",
       category: "Wireless Headphones"
+    },
+    {
+      id: "rec4",
+      name: "Sennheiser Accentum Wireless",
+      price: 179.95,
+      rating: 4.5,
+      reviewsCount: "348",
+      imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&auto=format&fit=crop&q=80",
+      category: "Wireless Headphones"
+    },
+    {
+      id: "rec5",
+      name: "Sony LinkBuds S Earbuds",
+      price: 148.00,
+      rating: 4.6,
+      reviewsCount: "512",
+      imageUrl: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=300&auto=format&fit=crop&q=80",
+      category: "Wireless Earbuds"
     }
   ];
+
+  // Visual subset of 3 items
+  const visibleRecs = ALL_RECS.slice(startIndex, startIndex + 3);
+
+  const handleNext = () => {
+    if (startIndex + 3 < ALL_RECS.length) {
+      setStartIndex((prev) => prev + 1);
+    } else {
+      setStartIndex(0);
+    }
+  };
+
+  const handlePrev = () => {
+    if (startIndex > 0) {
+      setStartIndex((prev) => prev - 1);
+    } else {
+      setStartIndex(ALL_RECS.length - 3);
+    }
+  };
 
   const handleSelect = (rec: MockRelatedProduct) => {
     // Navigate home, or select a high fidelity product demo
@@ -75,7 +114,7 @@ export default function RelatedProductsGrid({ onSelectProduct }: RelatedProducts
         <div className="flex items-center gap-1.5">
           <button 
             type="button"
-            onClick={() => alert("Already showing our recommended audio collection.")}
+            onClick={handlePrev}
             className="w-7 h-7 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 flex items-center justify-center text-zinc-700 cursor-pointer transition-all hover:scale-105 active:scale-95"
             aria-label="Previous suggestions"
           >
@@ -84,7 +123,7 @@ export default function RelatedProductsGrid({ onSelectProduct }: RelatedProducts
           
           <button 
             type="button"
-            onClick={() => alert("Recommendations lists cycle dynamically as you explore.")}
+            onClick={handleNext}
             className="w-7 h-7 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 flex items-center justify-center text-zinc-700 cursor-pointer transition-all hover:scale-105 active:scale-95"
             aria-label="Next suggestions"
           >
@@ -95,7 +134,7 @@ export default function RelatedProductsGrid({ onSelectProduct }: RelatedProducts
 
       {/* Grid containing 3 vertical product cards (from mockup image) */}
       <div className="flex items-center gap-3 overflow-x-auto py-1 scrollbar-none">
-        {recommendations.map((rec) => (
+        {visibleRecs.map((rec) => (
           <div
             key={rec.id}
             onClick={() => handleSelect(rec)}

@@ -104,7 +104,7 @@ export default function TopBrands({ onBrandClick }: TopBrandsProps) {
       </div>
 
       {/* Grid of clean brand cells with exact card layout */}
-      <div className="grid grid-cols-5 md:grid-cols-10 gap-2.5 sm:gap-3" id="brands-logos-grid">
+      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 gap-2 sm:gap-3" id="brands-logos-grid">
         {BRANDS.map((brand) => (
           <button
             key={brand.name}

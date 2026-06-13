@@ -108,12 +108,12 @@ export default function ProductImageGallery({ product, discountPercent, selected
     <div className="flex flex-col gap-6" id="product-detail-gallery-container flex-initial">
       
       {/* 2-Column Gallery Layout matching screenshot exactly: Vertical list + Large image */}
-      <div className="flex gap-4 items-stretch">
+      <div className="flex flex-col-reverse sm:flex-row gap-4 items-stretch">
         
-        {/* Left column: Vertical Thumbnails list stack */}
-        <div className="relative shrink-0 w-16 sm:w-20" id="gallery-vertical-thumbnails-wrapper">
+        {/* Left column: Thumbnails list stack (horizontal on mobile, vertical on sm+) */}
+        <div className="relative shrink-0 w-full sm:w-20 h-16 sm:h-auto" id="gallery-vertical-thumbnails-wrapper">
           <div 
-            className="absolute inset-0 flex flex-col gap-3 overflow-y-auto pr-1 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-zinc-300 [&::-webkit-scrollbar-thumb]:rounded-full" 
+            className="sm:absolute sm:inset-0 flex flex-row sm:flex-col gap-3 overflow-x-auto sm:overflow-y-auto pb-2 sm:pb-0 pr-1 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-zinc-300 [&::-webkit-scrollbar-thumb]:rounded-full" 
             id="gallery-vertical-thumbnails"
           >
             {renderedThumbnails.map((img, index) => {

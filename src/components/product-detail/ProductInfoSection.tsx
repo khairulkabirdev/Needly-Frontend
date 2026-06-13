@@ -34,6 +34,7 @@ export default function ProductInfoSection({
   // Active models/sizes list
   const availableModels = ["Standard", "XM5 Premium", "XM5 Bundle"];
   const [selectedModel, setSelectedModel] = useState(availableModels[0]);
+  const [comparedState, setComparedState] = useState(false);
 
   // Handle Buy Now workflow
   const handleBuy = () => {
@@ -239,14 +240,26 @@ export default function ProductInfoSection({
         </button>
 
         <button
-          className="flex items-center space-x-1.5 hover:text-zinc-950 transition-colors cursor-pointer select-none font-medium"
+          className={`flex items-center space-x-1.5 transition-colors cursor-pointer select-none font-medium ${comparedState ? 'text-emerald-600' : 'hover:text-zinc-950 text-zinc-500'}`}
           type="button"
-          onClick={() => alert("Product added to comparative list dashboard!")}
+          onClick={() => {
+            setComparedState(true);
+            setTimeout(() => setComparedState(false), 3000);
+          }}
         >
-          <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-          </svg>
-          <span>Compare</span>
+          {comparedState ? (
+            <>
+              <Check className="w-4 h-4 text-emerald-600 animate-bounce" />
+              <span>Added to Compare!</span>
+            </>
+          ) : (
+            <>
+              <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              <span>Compare</span>
+            </>
+          )}
         </button>
       </div>
 

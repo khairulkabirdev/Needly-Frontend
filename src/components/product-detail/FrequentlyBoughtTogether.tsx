@@ -17,6 +17,7 @@ interface BundleItem {
 }
 
 export default function FrequentlyBoughtTogether({ product, onAddToCart }: FrequentlyBoughtTogetherProps) {
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
   // Setup exact accessories matching the image:
   // - Sony WH-1000XM5 Wireless Headphones ($299.99)
   // - Sony Headphone Case for WH-1000XM5 ($29.99)
@@ -94,7 +95,10 @@ export default function FrequentlyBoughtTogether({ product, onAddToCart }: Frequ
       onAddToCart(mockProduct, 1, "Original Series");
     });
 
-    alert(`Successfully bundled and loaded ${selectedItems.length} items to your shopping bag!`);
+    setSuccessMsg(`Successfully loaded ${selectedItems.length} items to your shopping bag!`);
+    setTimeout(() => {
+      setSuccessMsg(null);
+    }, 4000);
   };
 
   return (
@@ -103,6 +107,13 @@ export default function FrequentlyBoughtTogether({ product, onAddToCart }: Frequ
         <h3 className="text-sm font-bold text-zinc-950 tracking-tight mb-4 shrink-0">
           Frequently Bought Together
         </h3>
+        
+        {successMsg && (
+          <div className="mb-3.5 px-3 py-2 bg-emerald-50 border border-emerald-150 rounded-xl text-emerald-800 text-[10px] sm:text-[11px] font-bold animate-fade-in shadow-3xs flex items-center gap-1.5">
+            <span>✓</span>
+            <span>{successMsg}</span>
+          </div>
+        )}
         
         {/* Row matching layout with Plus dividers */}
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap">

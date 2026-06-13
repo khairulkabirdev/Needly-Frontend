@@ -13,6 +13,7 @@ interface LayoutProps {
   onNavigateHome: () => void;
   onNavigateToWishlist: () => void;
   onNavigateToCheckout: () => void;
+  onNavigateToAuth: () => void;
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
   isAuthOpen: boolean;
@@ -38,6 +39,7 @@ export default function Layout({
   onNavigateHome,
   onNavigateToWishlist,
   onNavigateToCheckout,
+  onNavigateToAuth,
   isCartOpen,
   setIsCartOpen,
   isAuthOpen,
@@ -102,7 +104,7 @@ export default function Layout({
         onOpenWishlist={onNavigateToWishlist}
         activeNavTab={activeNavTab}
         setActiveNavTab={setActiveNavTab}
-        onOpenAuth={() => setIsAuthOpen(true)}
+        onOpenAuth={onNavigateToAuth}
         currentPath={currentPath}
         onNavigateHome={onNavigateHome}
       />

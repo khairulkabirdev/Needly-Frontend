@@ -35,6 +35,9 @@ export default function SmartphonesPage({
   // Grid/List toggle state
   const [isGridView, setIsGridView] = useState(true);
 
+  // Mobile filters toggled state
+  const [isFiltersMobileOpen, setIsFiltersMobileOpen] = useState(false);
+
   // Sorting state (Popular, LowToHigh, HighToLow, Rating)
   const [sortedBy, setSortedBy] = useState("Popular");
 
@@ -234,7 +237,7 @@ export default function SmartphonesPage({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start" id="smartphones-grid-split">
           
           {/* ================== LEFT FILTER SIDEBAR BACKPLANE ================== */}
-          <aside className="lg:col-span-3 bg-white border border-zinc-200/60 rounded-[28px] p-5 shadow-3xs text-left select-none space-y-6" id="smartphones-filter-sidebar">
+          <aside className={`${isFiltersMobileOpen ? "block" : "hidden lg:block"} lg:col-span-3 bg-white border border-zinc-200/60 rounded-[28px] p-5 shadow-3xs text-left select-none space-y-6 animate-fade-in`} id="smartphones-filter-sidebar">
             
             {/* Category Listing Module */}
             <div className="space-y-3" id="categories-filter-widget">
@@ -506,11 +509,11 @@ export default function SmartphonesPage({
           <main className="lg:col-span-9" id="smartphones-product-area">
             
             {/* Top Area Toolbar */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between  p-4 mb-6  gap-3" id="smartphones-results-top-toolbar">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 mb-6 gap-3 bg-gray-50 border border-zinc-100 rounded-2xl" id="smartphones-results-top-toolbar">
               
-              {/* Layout triggers (Grid / List switcher) */}
-              <div className="flex items-center gap-4 text-left">
-                <div className="flex items-center gap-1">
+              {/* Layout triggers (Grid / List switcher + Mobile Filter Button) */}
+              <div className="flex items-center justify-between sm:justify-start gap-4 text-left w-full sm:w-auto">
+                <div className="flex items-center gap-2">
                   <button 
                     onClick={() => setIsGridView(true)}
                     className={`p-2 rounded-lg cursor-pointer transition-all ${isGridView ? "bg-[#FFF5F0] text-[#FF5000] border border-[#FF5000]/10" : "text-zinc-400 hover:bg-zinc-100"}`}
@@ -527,10 +530,21 @@ export default function SmartphonesPage({
                   >
                     <List className="w-4 h-4" />
                   </button>
+
+                  {/* Toggle Filters Button for Mobile and Tablet viewports */}
+                  <button
+                    type="button"
+                    onClick={() => setIsFiltersMobileOpen(!isFiltersMobileOpen)}
+                    className="lg:hidden flex items-center space-x-1.5 px-3 py-2 bg-white border border-zinc-200 hover:border-[#FF5000]/30 hover:bg-orange-50 text-zinc-700 hover:text-[#FF5000] text-xs font-bold rounded-lg transition-all cursor-pointer shadow-3xs"
+                    id="toggle-filters-mobile-btn"
+                  >
+                    <SlidersHorizontal className="w-3.5 h-3.5" />
+                    <span>Filters {selectedBrands.length + selectedStars.length + selectedStorage.length + selectedScreenSizes.length > 0 ? `(${selectedBrands.length + selectedStars.length + selectedStorage.length + selectedScreenSizes.length})` : ""}</span>
+                  </button>
                 </div>
                 
-                <span className="text-xs text-zinc-500 font-semibold font-mono">
-                  Showing 1-{filteredAndSortedProducts.length} of 324 results
+                <span className="text-xs text-zinc-500 font-semibold font-mono shrink-0">
+                  Showing 1-{filteredAndSortedProducts.length} results
                 </span>
               </div>
 

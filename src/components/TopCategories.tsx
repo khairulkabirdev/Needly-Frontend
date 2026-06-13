@@ -27,7 +27,7 @@ export default function TopCategories({ onCategorySelect, selectedCategory }: To
       </div>
 
       {/* Grid wrapper containing cards exactly styled like the image layout */}
-      <div className="grid grid-cols-4 lg:grid-cols-8 gap-4" id="categories-cards-row">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4" id="categories-cards-row">
         {CATEGORIES.map((cat) => {
           const isActive = selectedCategory === cat.name;
           return (
